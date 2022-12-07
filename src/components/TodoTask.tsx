@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button } from 'reactstrap';
 import { AppDispatch } from '../redux/store';
 import { removeTask } from '../redux/features/todo/todoSlice';
 import TodoSubtask from './TodoSubtask';
+import { changeDescription, changeModalType, changeTaskId, changeTodoId, toggleModal } from '../redux/features/modal/modalSlice';
 
 function TodoTask({ id, tasks }: { id: number, tasks: any}) {
   const dispatch = useDispatch<AppDispatch>();
 
+  const onAddSubTask = (id: number, taskId: number) => {
+    dispatch(changeTodoId(id))
+    dispatch(changeTaskId(taskId))
+    dispatch(changeModalType('addSubTask'))
+    dispatch(toggleModal())
+  }
+
   if (!tasks || tasks?.length < 1) return null
+
+  const onEdit = (description:string, id: number, taskId: number) => {
+    dispatch(changeDescription(description))
+    dispatch(changeTodoId(id))
+    dispatch(changeTaskId(taskId))
+    dispatch(changeModalType('editTask'))
+    dispatch(toggleModal())
+  }
 
   return (
     <div className="d-grid gap-3 mt-2">
@@ -18,17 +33,13 @@ function TodoTask({ id, tasks }: { id: number, tasks: any}) {
                     <div className="me-auto">{task?.description}</div>
                     <Button
                         color="primary"
-                        onClick={() => {
-                            //dispatch(removeTask([id, task.id]));
-                        }}
+                        onClick={() => onAddSubTask(id, task.id)} 
                     >
-                        Add Task
+                        Add Subtask
                     </Button>
                     <Button
                         color="secondary"
-                        onClick={() => {
-                            //dispatch(removeTodo(id));
-                        }}
+                        onClick={() => onEdit(task.description, id, task.id)}
                     >
                         Edit Task
                     </Button>
