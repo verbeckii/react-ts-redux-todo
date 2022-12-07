@@ -4,8 +4,9 @@ import { AppDispatch } from '../redux/store';
 import { removeTask } from '../redux/features/todo/todoSlice';
 import TodoSubtask from './TodoSubtask';
 import { changeDescription, changeModalType, changeTaskId, changeTodoId, toggleModal } from '../redux/features/modal/modalSlice';
+import { Task } from '../models/Task';
 
-function TodoTask({ id, tasks }: { id: number, tasks: any}) {
+function TodoTask({ id, tasks }: { id: number, tasks: Task[]}) {
   const dispatch = useDispatch<AppDispatch>();
 
   const onAddSubTask = (id: number, taskId: number) => {
@@ -27,7 +28,7 @@ function TodoTask({ id, tasks }: { id: number, tasks: any}) {
 
   return (
     <div className="d-grid gap-3 mt-2">
-        {tasks.map((task:any) => (
+        {tasks.map((task:Task) => (
             <div key={task?.id} className="p-2 bg-light border">
                 <div className="d-flex justify-content-end gap-2 align-items-center">
                     <div className="me-auto">{task?.description}</div>

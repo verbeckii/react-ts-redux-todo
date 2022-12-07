@@ -3,8 +3,9 @@ import { Button } from 'reactstrap';
 import { AppDispatch } from '../redux/store';
 import { removeSubtask } from '../redux/features/todo/todoSlice';
 import { changeDescription, changeModalType, changeSubtaskId, changeTaskId, changeTodoId, toggleModal } from '../redux/features/modal/modalSlice';
+import { Subtask } from '../models/Subtask';
 
-function TodoSubtask({ id, taskId, subtasks }: { id: number, taskId: number, subtasks: any}) {
+function TodoSubtask({ id, taskId, subtasks }: { id: number, taskId: number, subtasks: Subtask[]}) {
   const dispatch = useDispatch<AppDispatch>();
 
   const onEdit = (id: number, taskId: number, subtaskId: number, description:string, ) => {
@@ -20,7 +21,7 @@ function TodoSubtask({ id, taskId, subtasks }: { id: number, taskId: number, sub
 
   return (
     <>
-        {subtasks.map((subtask:any) => (
+        {subtasks.map((subtask:Subtask) => (
             <div key={subtask.id} className="p-2 bg-light border mt-1 d-flex justify-content-between align-items-center">
                 {subtask?.description}
                 <div className="d-flex justify-content-end gap-2">

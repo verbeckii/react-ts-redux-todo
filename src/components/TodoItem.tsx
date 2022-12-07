@@ -4,8 +4,9 @@ import { AppDispatch } from '../redux/store';
 import { removeTodo } from '../redux/features/todo/todoSlice';
 import TodoTask from './TodoTask';
 import { changeDescription, changeModalType, changeTodoId, toggleModal } from '../redux/features/modal/modalSlice';
+import { Task } from '../models/Task';
 
-function TodoItem({description, id, tasks}: { description: string; id: number, tasks: any}) {
+function TodoItem({description, id, tasks}: { description: string; id: number, tasks: Task[]}) {
   const dispatch = useDispatch<AppDispatch>();
 
   const onAddTask = (id: number) => {

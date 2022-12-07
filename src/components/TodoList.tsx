@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
+import { Todo } from '../models/Todo';
 import { RootState } from '../redux/store';
 import TodoItem from './TodoItem';
 import TodoPreview from './TodoPreview';
@@ -19,7 +20,7 @@ function TodoList() {
 
   return (
     <div>
-      {todoList.map((todo: any) => (
+      {todoList.map((todo: Todo) => (
         <TodoItem 
             key={todo.id}
             id={todo.id}

@@ -77,14 +77,16 @@ function TodoPreview() {
                     onChange={onChange}
                 />
             </ModalBody>
-        <ModalFooter>
-            <Button color="primary" onClick={onSave}>
-                Save
-            </Button>
-            <Button color="secondary" onClick={toggle}>
-                Cancel
-            </Button>
-        </ModalFooter>
+            {todoId && 
+              <ModalFooter>
+                <Button color="primary" onClick={onSave}>
+                    Save
+                </Button>
+                <Button color="secondary" onClick={toggle}>
+                    Cancel
+                </Button>
+              </ModalFooter>
+            }
     </Modal>
   );
 }
